@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moonlight — Agentur für Ordnung, Glamour & Frieden</title>
+<meta name="description" content="Moonlight Agency: High-Class Eventplanung, Krisenmanagement und Marken-Transformation. Im Namen des Mondes retten wir Ihr Projekt.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --page:#EFEDE8;
+    --card:#F9F8F6;
+    --ink:#141414;
+    --gray:#A4A4A4;
+    --gray-2:#6E6E6E;
+    --line:rgba(20,20,20,.1);
+    --pink:#F5D6E6;
+    --pink-deep:#E39EC4;
+    --gold:#E9D9A8;
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Inter',-apple-system,'Helvetica Neue',Arial,sans-serif;
+    /* layered shadows: hairline ring, two contact layers, one wide ambient cast */
+    --shadow-card:
+      0 0 0 1px rgba(0,0,0,.04),
+      0 1px 2px 0 rgba(0,0,0,.08),
+      0 4px 6px 0 rgba(0,0,0,.04),
+      0 40px 40px -24px rgba(0,0,0,.08);
+    --shadow-soft:
+      0 0 0 1px rgba(0,0,0,.04),
+      0 1px 2px 0 rgba(0,0,0,.06),
+      0 4px 6px 0 rgba(0,0,0,.04),
+      0 40px 40px -24px rgba(0,0,0,.06);
+    --shadow-pill:
+      0 0 0 1px rgba(0,0,0,.04),
+      0 1px 2px 0 rgba(0,0,0,.08),
+      0 4px 6px 0 rgba(0,0,0,.04),
+      0 24px 40px -16px rgba(0,0,0,.08);
+    --shadow-dark:
+      0 1px 1px 0 rgba(0,0,0,.12),
+      0 1.5px 3px 0 rgba(0,0,0,.2),
+      0 4px 8px 0 rgba(0,0,0,.2),
+      0 12px 24px -6px rgba(0,0,0,.3);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--page);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:15px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--pink);color:var(--ink)}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  section{padding:110px 0}
+  /* Sections, die direkt an eine vorherige anschliessen und daher oben knapper sitzen */
+  .tight-top{padding-top:20px}
+
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:400;letter-spacing:-.04em;line-height:1.07}
+  h2{font-size:clamp(34px,4.6vw,56px)}
+  .serif-hl{position:relative;white-space:nowrap;isolation:isolate}
+  .serif-hl::before{
+    content:'';position:absolute;inset:-.04em -.18em -.08em;
+    background:var(--pink);border-radius:.6rem;z-index:-1;transform:rotate(-.4deg);
+  }
+  em{font-style:italic}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink);margin-bottom:22px;
+    border:1px solid var(--line);border-radius:100px;padding:7px 14px;
+  }
+  .eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--pink-deep)}
+  .lede{color:var(--gray-2);font-size:16px;max-width:520px;margin-top:20px}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:-.01em;
+    line-height:20px;
+    background:var(--ink);color:#fff;border:none;cursor:pointer;text-decoration:none;
+    padding:10px 20px;border-radius:100px;
+    transition:transform .25s ease,background .25s ease;
+  }
+  .btn{box-shadow:var(--shadow-dark)}
+  .btn:hover{transform:scale(1.04);background:#000}
+  .btn-light{background:transparent;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+  .btn-light:hover{background:rgba(20,20,20,.05)}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.6,.2,1),transform .8s cubic-bezier(.2,.6,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  /* .reveal.in setzt transform:none und steht hinter .btn:hover — Buttons, die
+     selbst .reveal tragen, verlieren dadurch ihren Hover. Hier zurueckgeholt. */
+  .btn.reveal.in{transition:transform .25s ease,background .25s ease,opacity .8s cubic-bezier(.2,.6,.2,1)}
+  .btn.reveal.in:hover{transform:scale(1.04)}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(239,237,232,.85);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  }
+  .nav-inner{
+    max-width:1200px;margin:0 auto;padding:18px 24px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;
+  }
+  .logo{
+    display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink);
+    font-family:var(--serif);font-size:22px;letter-spacing:-.03em;font-weight:500;
+  }
+  .logo svg{width:26px;height:26px}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-links a:not(.btn){color:var(--ink);text-decoration:none;font-size:14px;letter-spacing:-.01em;opacity:.85;transition:opacity .2s}
+  .nav-links a:not(.btn):hover{opacity:1}
+  @media(max-width:840px){.nav-links a:not(.btn){display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{padding:16px 0 8px}
+  .hero-card{
+    background:var(--card);border-radius:28px;
+    padding:56px 48px 48px;position:relative;overflow:hidden;
+    text-align:center;
+    /* fuellt den Viewport abzueglich Navigation und der 16+8px Aussenabstaende;
+       --nav-h wird per JS exakt gesetzt, der Wert hier ist nur der Startwert */
+    min-height:calc(100dvh - var(--nav-h,76px) - 24px);
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  /* untere Grenze niedrig genug, damit die nicht umbrechende Zeile
+     "magical Things" auch auf schmalen Displays in die Karte passt */
+  .hero h1{font-size:clamp(26px,7.6vw,92px)}
+  .hero h1 .line2{display:inline-block;margin-top:.06em}
+  .toolbar{
+    display:inline-flex;align-items:center;gap:2px;
+    background:#fff;border:1px solid var(--line);border-radius:10px;
+    padding:6px 8px;margin-top:26px;
+    box-shadow:var(--shadow-pill);
+    font-size:13px;color:var(--gray-2);
+  }
+  .toolbar .tb{padding:5px 10px;border-radius:6px;display:flex;align-items:center;gap:6px}
+  .toolbar .tb:first-child{border:1px solid var(--line);margin-right:6px}
+  .toolbar .tb b{font-weight:600;color:var(--ink)}
+  .toolbar .tb.i{font-style:italic;font-family:var(--serif)}
+  .toolbar .tb.hl{background:var(--pink);color:var(--ink);font-weight:600}
+  .discs{margin:22px auto 30px;max-width:880px;display:block;width:100%;height:auto}
+  .hero-foot{
+    display:flex;flex-direction:column;justify-content:center;align-items:center;gap:28px;
+    text-align:center;margin-top:14px;
+  }
+  .hero-foot .mono{
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-2);
+    font-weight:500;display:flex;gap:10px;
+  }
+  .hero-foot .desc{color:var(--gray-2);font-size:15px;text-align:center;flex:1;min-width:260px}
+  .copy-mail{cursor:pointer;user-select:none;background:none;border:none;font:inherit;color:var(--gray-2);letter-spacing:.14em;text-transform:uppercase;font-size:12px;font-weight:500;display:flex;gap:8px;align-items:center;transition:color .2s}
+  .copy-mail:hover{color:var(--ink)}
+  @media(max-width:640px){
+    .hero-card{padding:44px 22px 40px}
+  }
+
+  /* ---------- clients ---------- */
+  .clients{padding:100px 0 60px;text-align:center}
+  .clients h2{max-width:600px;margin:0 auto}
+  .client-row{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:16px 44px;margin-top:54px;
+    font-family:var(--serif);font-size:22px;letter-spacing:-.02em;color:var(--gray);
+  }
+  .client-row span{display:flex;align-items:center;gap:10px}
+  .client-row .s{font-size:11px;color:var(--pink-deep)}
+
+  /* ---------- marquee ---------- */
+  .reel{padding:70px 0;overflow:hidden}
+  .reel-track{display:flex;width:max-content;animation:reelScroll 120s linear infinite}
+  .reel-track span{
+    font-family:var(--serif);font-weight:400;letter-spacing:-.04em;
+    font-size:clamp(64px,9vw,124px);line-height:1.05;color:var(--gray);
+    white-space:nowrap;
+  }
+  .reel-track .m{display:inline-flex;align-items:center;justify-content:center;width:0.55em;height:1em;margin:0 .12em;vertical-align:middle;line-height:1}
+  @keyframes reelScroll{to{transform:translateX(-50%)}}
+
+  /* ---------- work ---------- */
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:64px}
+  .sec-head h2{max-width:640px}
+  /* gestapelte Variante: Headline, Fliesstext, Button untereinander */
+  .sec-head-stack{display:block}
+  /* balance verteilt die Zeilen gleichmaessig, statt die letzte kurz ausfransen zu lassen */
+  .sec-head-stack h2{max-width:21ch;text-wrap:balance}
+  .sec-head-stack .lede{max-width:60ch;text-wrap:pretty}
+  .sec-head-stack .btn{margin-top:32px}
+  .tags{display:flex;gap:8px;flex-wrap:wrap}
+  .tag{
+    font-size:12px;font-weight:500;color:var(--ink);
+    padding:7px 14px;border-radius:100px;border:1px solid var(--line);
+    white-space:nowrap;background:var(--card);
+  }
+
+  /* staggered project collage (orionix-style) */
+  .collage{display:flex;gap:72px;align-items:flex-start}
+  .col{flex:1;display:flex;flex-direction:column;min-width:0}
+  .col-l{padding-top:300px}
+  .proj{display:block;text-decoration:none;color:var(--ink);margin-bottom:110px;position:relative}
+  .proj.sm{width:86%}
+  .col-r .proj.sm{align-self:flex-end}
+  .proj-frame{
+    background:#fff;border-radius:24px;padding:13px;
+    box-shadow:var(--shadow-card);
+    transition:transform .4s cubic-bezier(.2,.6,.2,1);
+  }
+  .proj:hover .proj-frame{transform:translateY(-8px) rotate(-.6deg)}
+  .proj-art{
+    border-radius:16px;overflow:hidden;aspect-ratio:3/4.6;position:relative;
+  }
+  .art-inner{
+    position:absolute;left:0;right:0;top:-13%;bottom:-13%;
+    display:flex;align-items:center;justify-content:center;
+    will-change:transform;
+  }
+  .proj-art .big{
+    font-family:var(--serif);letter-spacing:-.03em;line-height:1.02;text-align:center;
+    font-size:clamp(30px,3.6vw,46px);
+  }
+  .proj-art .tiny{
+    position:absolute;font-size:10px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;
+  }
+  .proj-num{
+    position:absolute;top:-14px;left:-10px;z-index:2;
+    font-family:var(--serif);font-size:56px;letter-spacing:-.04em;color:var(--gold);
+  }
+  .proj-title{font-family:var(--serif);font-size:30px;letter-spacing:-.04em;margin:26px 0 10px}
+  .proj-desc{color:var(--gray-2);font-size:14.5px;max-width:420px;margin-bottom:16px}
+  @media(max-width:900px){
+    .collage{flex-direction:column;gap:0}
+    /* Die Spalten enthalten 02,04 links und 01,03,05 rechts — gestapelt kaeme
+       daraus 02,04,01,03,05. display:contents loest die Spaltenkaesten auf,
+       sodass die fuenf Kacheln direkte Flex-Kinder werden und per order
+       wieder in die Reihenfolge 01–05 laufen. */
+    .col{display:contents}
+    .col-r .proj:nth-of-type(1){order:1}
+    .col-l .proj:nth-of-type(1){order:2}
+    .col-r .proj:nth-of-type(2){order:3}
+    .col-l .proj:nth-of-type(2){order:4}
+    .col-r .proj:nth-of-type(3){order:5}
+    .col-r .proj.sm{align-self:auto}
+    .proj{margin-bottom:70px}
+    .proj.sm{width:100%}
+  }
+
+  /* ---------- guardians wheel (orionix-style rotating cards) ---------- */
+  .guard-sigil{
+    width:56px;height:56px;border-radius:50%;flex:none;
+    display:block;position:relative;overflow:hidden;
+  }
+  .guard-sigil img{width:100%;height:100%;object-fit:cover;display:block}
+  /* Farbverlauf der Wächterin als transparentes Overlay über dem Portrait */
+  .guard-sigil::after{content:"";position:absolute;inset:0;background:var(--gt)}
+  .wheel-sec{position:relative;height:490vh;padding:0}
+  .wheel-sticky{position:sticky;top:0;height:100vh;overflow:hidden}
+  /* no z-index / transform here: both would open a stacking context and the
+     blend below could then only mix with this box instead of the cards */
+  .wheel-head{
+    position:absolute;left:max(24px,calc(50vw - 588px));top:0;bottom:0;
+    width:min(380px,42vw);pointer-events:none;
+    display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  }
+  .wheel-head > *{position:relative;z-index:20}
+  .wheel-head h2{color:var(--ink)}
+  .wheel-head .lede{color:var(--gray-2)}
+  /* white twin, revealed only across the area a dark card actually covers */
+  .wheel-head-light{
+    z-index:21;
+    clip-path:polygon(0 0,0 0,0 0,0 0);
+    opacity:var(--lit,0);
+  }
+  .wheel-head-light > *{z-index:21}
+  .wheel-head-light h2{color:#FCFAFF}
+  .wheel-head-light .lede{color:rgba(252,250,255,.82)}
+  .wheel-head-light .eyebrow{color:#FCFAFF;border-color:rgba(255,255,255,.3)}
+  .wheel-head-light .wheel-progress i{background:rgba(255,255,255,.25)}
+  .wheel-head-light .wheel-progress i.on{background:var(--pink-deep)}
+  .wheel-head .lede{font-size:15px}
+  .wheel-progress{
+    display:flex;gap:8px;margin-top:30px;
+  }
+  .wheel-progress i{
+    width:26px;height:3px;border-radius:2px;background:rgba(20,20,20,.12);
+    transition:background .3s;
+  }
+  .wheel-progress i.on{background:var(--pink-deep)}
+  .wcard{
+    position:absolute;left:0;top:0;width:min(440px,86vw);
+    border-radius:24px;padding:34px 32px 30px;
+    /* weisse Flaeche bis zur Innenkante, Verlauf der Waechterin im Rahmen */
+    border:2px solid transparent;
+    background:linear-gradient(#fff,#fff) padding-box, var(--g) border-box;
+    box-shadow:var(--shadow-card);
+    will-change:transform;visibility:hidden;
+  }
+  /* cards that have rotated past the stage centre dim out so the headline stays readable */
+  .wcard::after{
+    /* -2px: deckt auch den Rahmen ab, sonst bliebe er beim Abdunkeln hell stehen */
+    content:'';position:absolute;inset:-2px;border-radius:inherit;
+    background:#100D1A;opacity:var(--dim,0);pointer-events:none;
+  }
+  .wcard-top{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+  .wcard h3{font-size:28px}
+  .wcard .role{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-top:6px}
+  .wcard p{color:var(--gray-2);font-size:14px;margin-bottom:14px}
+  .wcard .quirk{
+    padding:12px 16px;border-radius:14px;background:var(--card);
+    font-size:12.5px;color:var(--gray-2);border:1px dashed var(--line);margin-bottom:16px;
+  }
+  .wcard .quirk b{color:var(--ink);font-weight:600}
+  .hint-swipe{display:none}
+  /* narrow screens: swipe wheel when JS sets .m-on, stacked list otherwise */
+  @media(max-width:900px){
+    .wheel-sec{height:auto;padding:20px 0 40px}
+    .wheel-sticky{position:static;height:auto;overflow:visible;padding:0 24px}
+    .wheel-head{
+      position:static;transform:none;left:auto;top:auto;bottom:auto;
+      width:auto;max-width:560px;display:block;margin:0 auto 36px;pointer-events:auto;
+    }
+    .wheel-head-light{display:none}
+    .wheel-head h2{color:var(--ink)}
+    .wheel-head .lede{color:var(--gray-2)}
+    .wheel-progress{display:none}
+    .wheel-sec:not(.m-on) .wcard{
+      position:static;width:100%;max-width:560px;margin:0 auto 18px;
+      transform:none!important;visibility:visible!important;opacity:1!important;
+      padding:30px 26px 26px;box-shadow:var(--shadow-soft);
+    }
+    .wcard::after{display:none}
+    .wcard h3{font-size:25px}
+
+    .hint-scroll{display:none}
+    .hint-swipe{display:inline}
+    /* Swipe-Rad: Karten haengen wieder am Rad, Drehung kommt aus der Geste.
+       pan-y laesst vertikales Scrollen durch, horizontale Zuege gehoeren dem Rad */
+    .wheel-sec.m-on{padding:20px 0 10px}
+    .wheel-sec.m-on .wheel-sticky{
+      position:relative;overflow:hidden;padding:0;
+      touch-action:pan-y;user-select:none;-webkit-user-select:none;
+    }
+    .wheel-sec.m-on .wheel-head{margin-bottom:6px;padding:0 24px}
+    .wheel-sec.m-on .wheel-progress{display:flex;margin-top:20px}
+    /* alle Karten haben dieselbe Hoehe (per JS gesetzt) — die Tags werden
+       nach unten geschoben, damit kein Loch am Kartenende entsteht */
+    .wheel-sec.m-on .wcard{
+      padding:30px 26px 26px;
+      display:flex;flex-direction:column;
+      /* nur nach oben werfen: dort liegen die Raender der hinteren Karten.
+         Kein Schatten nach unten — der wuerde am Rand der Buehne abgeschnitten */
+      box-shadow:
+        0 -2px 4px -1px rgba(24,18,48,.10),
+        0 -8px 16px -6px rgba(24,18,48,.16);
+      /* oben verankert: dadurch ist der sichtbare Rand pro Stapelplatz
+         exakt der Versatz und wird nicht vom Verkleinern aufgefressen */
+      transform-origin:50% 0;
+    }
+    .wheel-sec.m-on .wcard .tags{margin-top:auto}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .wheel-sec{height:auto;padding:20px 0 40px}
+    .wheel-sticky{position:static;height:auto;overflow:visible;padding:0 24px}
+    .wheel-head{
+      position:static;transform:none;left:auto;top:auto;bottom:auto;
+      width:auto;max-width:560px;display:block;margin:0 auto 36px;pointer-events:auto;
+    }
+    .wheel-head-light{display:none}
+    .wheel-head h2{color:var(--ink)}
+    .wheel-head .lede{color:var(--gray-2)}
+    .wheel-progress{display:none}
+    .wcard{
+      position:static;width:100%;max-width:560px;margin:0 auto 18px;
+      transform:none!important;visibility:visible!important;opacity:1!important;
+      padding:30px 26px 26px;box-shadow:var(--shadow-soft);
+    }
+    .wcard::after{display:none}
+  }
+
+  /* ---------- services ---------- */
+  .svc-list{border-top:1px solid var(--line)}
+  /* feste Spaltenbreiten statt align-items:center: jede Zeile richtet sich
+     an derselben Grundlinie oben aus, statt je nach Inhaltshoehe zu springen */
+  .svc{
+    display:grid;grid-template-columns:260px 1fr 300px;gap:32px;align-items:start;
+    border-bottom:1px solid var(--line);padding:40px 0;
+  }
+  .svc h3{font-size:28px}
+  .svc p{color:var(--gray-2);font-size:15px;line-height:1.55}
+  .svc .tags{justify-content:flex-end}
+  @media(max-width:900px){
+    .svc{grid-template-columns:1fr;gap:14px}
+    .svc .tags{justify-content:flex-start}
+  }
+
+  /* ---------- process ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .step{
+    background:var(--card);border-radius:22px;padding:40px 34px;min-height:280px;
+    display:flex;flex-direction:column;
+  }
+  .step .n{
+    width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;
+    font-family:var(--serif);font-size:19px;display:flex;align-items:center;justify-content:center;
+    margin-bottom:auto;
+  }
+  .step h3{font-size:26px;margin:34px 0 12px}
+  .step p{color:var(--gray-2);font-size:14.5px}
+  @media(max-width:840px){.steps{grid-template-columns:1fr}.step{min-height:0}}
+
+  /* ---------- pricing ---------- */
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .price{
+    background:var(--card);border-radius:22px;padding:40px 34px;
+    display:flex;flex-direction:column;
+  }
+  .price.dark{background:var(--ink);color:#fff}
+  .price.dark .price-desc,.price.dark li{color:rgba(255,255,255,.65)}
+  .price.dark li{border-color:rgba(255,255,255,.12)}
+  .price h3{font-size:27px}
+  .price-desc{color:var(--gray-2);font-size:14.5px;margin:12px 0 26px}
+  .price ul{list-style:none;flex:1;margin-bottom:30px}
+  .price li{padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--gray-2);display:flex;gap:10px}
+  .price li::before{content:'✦';color:var(--pink-deep);font-size:11px;padding-top:3px}
+  .price-amount{font-family:var(--serif);font-size:40px;letter-spacing:-.03em;margin-bottom:20px}
+  .price-amount small{font-family:var(--sans);font-size:13px;color:var(--gray);letter-spacing:0}
+  .price .btn{justify-content:center}
+  .price.dark .btn{background:#fff;color:var(--ink)}
+  @media(max-width:940px){.price-grid{grid-template-columns:1fr}}
+
+  /* ---------- voices & stats ---------- */
+  /* dunkle, aufgefaecherte Karten im weissen Rahmen — nach Orionix-Vorbild */
+  /* align-items:stretch laesst alle drei Karten so hoch werden wie die laengste */
+  .quote-grid{display:flex;gap:0;align-items:stretch;justify-content:center;margin-bottom:120px;padding-top:64px}
+  .quote{
+    flex:1 1 0;max-width:400px;border-radius:26px;background:#fff;padding:6px;
+    box-shadow:var(--shadow-card);position:relative;display:flex;
+  }
+  /* Ueberlappung: die aussenliegenden Karten schieben sich unter die mittlere */
+  .quote:first-child{margin-right:-34px;z-index:1}
+  .quote:last-child{margin-left:-34px;z-index:1}
+  .quote:nth-child(2){z-index:3}
+  /* .reveal animiert transform — die Schraeglage liegt deshalb auf .in und
+     wird beim Erscheinen gleich mit eingedreht. Mitte gerade, aussen symmetrisch */
+  .quote:first-child.in{transform:rotate(-12deg) translateY(26px)}
+  .quote:last-child.in{transform:rotate(12deg) translateY(26px)}
+  /* mittlere Karte angehoben, damit sie ueber den oberen Ecken der gedrehten liegt */
+  .quote:nth-child(2).in{transform:translateY(-34px)}
+  .quote-inner{
+    flex:1;border-radius:21px;padding:54px 42px 46px;
+    display:flex;flex-direction:column;text-align:center;color:#fff;
+    position:relative;overflow:hidden;isolation:isolate;
+  }
+  /* unscharfe Bildebene — inset:-24px, damit der Weichzeichner keine
+     ausgefransten Kanten am Kartenrand hinterlaesst */
+  .quote-inner::before{
+    content:'';position:absolute;inset:-24px;z-index:0;
+    background:var(--img) center/cover;
+    filter:blur(18px);
+  }
+  /* Milchglas-Schleier: haelt den weissen Text lesbar, ohne die Karte zuzudecken */
+  .quote-inner::after{
+    content:'';position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg,rgba(16,13,26,.42),rgba(16,13,26,.74));
+    backdrop-filter:saturate(1.15);-webkit-backdrop-filter:saturate(1.15);
+  }
+  .quote-inner>*{position:relative;z-index:2}
+  .quote .face{
+    width:150px;height:150px;border-radius:50%;margin:0 auto 38px;flex:none;
+    background:var(--face,var(--img)) center/cover;
+    box-shadow:0 0 0 1px rgba(255,255,255,.18);
+  }
+  .quote p{font-family:var(--serif);font-size:20px;letter-spacing:-.02em;line-height:1.45;flex:1}
+  .quote .who{margin-top:34px;padding-top:28px;border-top:1px solid rgba(255,255,255,.15)}
+  .quote .who b{display:block;font-size:14px;font-weight:600}
+  .quote .who span{font-size:13px;color:rgba(255,255,255,.55)}
+  .sec-head-center{justify-content:center;text-align:center}
+  @media(max-width:840px){
+    .quote-grid{flex-direction:column;align-items:center;gap:18px;margin-bottom:70px;padding-top:0}
+    .quote{max-width:480px;width:100%;margin:0!important}
+    .quote:first-child.in,.quote:last-child.in,.quote:nth-child(2).in{transform:none}
+    .quote-inner{padding:44px 32px 38px}
+  }
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:center}
+  .stat .num{font-family:var(--serif);font-size:clamp(56px,7vw,88px);letter-spacing:-.04em;line-height:1}
+  .stat .lbl{color:var(--gray-2);font-size:14px;margin-top:10px}
+  @media(max-width:840px){.quote-grid,.stats{grid-template-columns:1fr}}
+
+  /* ---------- insights ---------- */
+  /* horizontal scrollendes Karussell mit Einrasten pro Kachel */
+  .post-grid{
+    display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+    /* overflow-x macht auch die y-Achse zum Clipping-Bereich: Innenabstand
+       schafft Platz fuer den Schatten, der negative Aussenabstand haelt das Layout */
+    padding:10px 22px 34px;margin:-10px -22px -34px;
+    scroll-padding-left:22px;
+    scrollbar-width:none;-ms-overflow-style:none;
+  }
+  .post-grid::-webkit-scrollbar{display:none}
+  .post{
+    background:var(--ink);border-radius:22px;padding:34px 30px;text-decoration:none;color:#fff;
+    display:flex;flex-direction:column;min-height:240px;
+    flex:0 0 calc((100% - 32px)/3);scroll-snap-align:start;
+    box-shadow:var(--shadow-dark);
+    transition:transform .3s ease;
+  }
+  .post:hover{transform:translateY(-4px)}
+  .post .date{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:500;margin-bottom:auto}
+  .post h3{font-size:23px;margin:30px 0 10px}
+  .post p{color:rgba(255,255,255,.66);font-size:14px;flex:1}
+  .post .tag{
+    align-self:flex-start;margin-top:18px;
+    background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.85);
+  }
+  /* Steuerung */
+  .post-nav{display:flex;align-items:center;gap:10px}
+  .carousel-btn{
+    width:42px;height:42px;border-radius:50%;flex:none;cursor:pointer;
+    background:transparent;border:1px solid var(--line);color:var(--ink);
+    font-size:16px;line-height:1;display:flex;align-items:center;justify-content:center;
+    transition:background .2s,opacity .2s;
+  }
+  .carousel-btn:hover:not(:disabled){background:rgba(20,20,20,.05)}
+  .carousel-btn:disabled{opacity:.3;cursor:default}
+  @media(max-width:940px){.post{flex-basis:calc((100% - 16px)/2)}}
+  @media(max-width:640px){.post{flex-basis:86%;min-height:0}}
+
+  /* ---------- faq ---------- */
+  .faq-wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:start}
+  .faq-list{border-top:1px solid var(--line)}
+  .faq-item{border-bottom:1px solid var(--line)}
+  .faq-q{
+    width:100%;background:none;border:none;cursor:pointer;text-align:left;
+    font-family:var(--serif);font-size:21px;letter-spacing:-.02em;color:var(--ink);
+    padding:26px 4px;display:flex;gap:20px;align-items:baseline;
+  }
+  .faq-q .n{color:var(--gray);font-size:15px;flex:none;width:20px}
+  .faq-q .chev{margin-left:auto;color:var(--gray);font-family:var(--sans);font-size:18px;transition:transform .3s}
+  .faq-item.open .chev{transform:rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+  .faq-a p{padding:0 44px 26px;color:var(--gray-2);font-size:14.5px}
+  @media(max-width:900px){.faq-wrap{grid-template-columns:1fr}}
+
+  /* ---------- cta (dark card, visual bleeding to the right, footer inside) ---------- */
+  .cta{padding:60px 0 16px}
+  .cta-card{
+    background:var(--ink);color:#fff;border-radius:32px;
+    padding:64px 40px 24px;position:relative;overflow:hidden;
+    display:flex;flex-direction:column;min-height:417px;
+    max-width:982px;margin:0 auto;   /* same footprint as the reference card */
+  }
+  .cta-visual{
+    position:absolute;right:0;top:0;bottom:0;width:54%;
+    pointer-events:none;
+  }
+  .cta-visual svg{width:100%;height:100%;display:block}
+  /* headline runs wide like the reference and breaks on its own <br>;
+     the visual sits behind it and is transparent on that side */
+  .cta-body{
+    position:relative;z-index:2;flex:1;max-width:640px;
+    display:flex;flex-direction:column;align-items:flex-start;
+  }
+  .cta-eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:12px;line-height:16px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+    color:rgba(255,255,255,.72);margin-bottom:16px;
+  }
+  .cta-eyebrow i{width:4px;height:4px;border-radius:999px;background:var(--pink-deep)}
+  .cta-card h2{
+    font-size:clamp(34px,4.9vw,51px);line-height:1.1;letter-spacing:-.032em;
+    color:#fff;margin-bottom:32px;
+  }
+  .cta-card .btn{
+    background:#fff;color:var(--ink);box-shadow:var(--shadow-pill);
+    align-self:flex-start;
+  }
+  .cta-card .btn:hover{background:#fff}
+  .cta-foot{position:relative;z-index:2;margin-top:44px}
+  .cta-rule{height:1px;background:rgba(255,255,255,.25)}
+  .cta-links{display:flex;gap:36px;flex-wrap:wrap;padding-top:26px}
+  .cta-links a{
+    display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+    color:rgba(255,255,255,.72);font-size:12px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;transition:color .2s;
+  }
+  .cta-links a:hover{color:#fff}
+  .cta-links svg{width:14px;height:14px;flex:none}
+  @media(max-width:820px){
+    .cta-card{padding:44px 26px 20px;min-height:0}
+    .cta-body{max-width:none}
+    .cta-visual{width:100%;opacity:.32}
+    .cta-links{gap:22px}
+  }
+
+  /* ---------- footer ---------- */
+  footer{padding:56px 0 0;overflow:hidden}
+  .foot-top{display:flex;flex-direction:column;align-items:center;gap:12px;padding-bottom:40px;text-align:center}
+  .foot-social{display:flex;gap:28px;flex-wrap:wrap}
+  .foot-social a{
+    color:var(--ink);text-decoration:none;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+    opacity:.75;transition:opacity .2s;
+  }
+  .foot-social a:hover{opacity:1}
+  .foot-copy{color:var(--gray);font-size:13px}
+
+  /* ---------- einheitlicher vertikaler Rhythmus auf schmalen Screens ----------
+     Steht bewusst am Ende: die Sections oben tragen sehr unterschiedliche
+     Abstaende (110/20/100/70/60), die hier alle auf denselben Wert gehen.
+     Jede Section 56px oben und unten ergibt durchgaengig 112px Abstand. */
+  @media(max-width:900px){
+    section,.tight-top{padding-top:56px;padding-bottom:56px}
+    .reel{padding:56px 0}
+    /* der Hero-Rand betraegt unten nur 8px — die Kunden-Section gleicht das aus,
+       damit auch der erste Uebergang bei 112px liegt */
+    .clients{padding-top:104px;padding-bottom:56px}
+    .wheel-sec,.wheel-sec.m-on{padding-top:56px;padding-bottom:56px}
+    .cta{padding-top:56px;padding-bottom:56px}
+    footer{padding-top:56px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#top">
+      <svg viewBox="0 0 32 32" fill="none">
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="32" y2="32">
+          <stop offset="0" stop-color="#E39EC4"/><stop offset="1" stop-color="#E9D9A8"/>
+        </linearGradient></defs>
+        <path d="M22 3.5A13.5 13.5 0 1 0 28.5 22 11 11 0 0 1 22 3.5Z" fill="url(#lg)"/>
+      </svg>
+      moonlight
+    </a>
+    <div class="nav-links">
+      <a href="#work">Projekte</a>
+      <a href="#guardians">Team</a>
+      <a href="#services">Leistungen</a>
+      <a href="#pricing">Pakete</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="btn">Termin buchen</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-card">
+      <h1 class="reveal">We make<br><span class="line2"><span class="serif-hl">magical Things</span></span></h1>
+
+      <svg class="discs reveal" viewBox="0 0 1100 220" aria-hidden="true">
+        <defs>
+          <linearGradient id="mphase" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#F6C6DE"/><stop offset=".5" stop-color="#C9B8F0"/><stop offset="1" stop-color="#8E7BD8"/>
+          </linearGradient>
+          <radialGradient id="mfull" cx="38%" cy="34%" r="70%">
+            <stop offset="0" stop-color="#F6C6DE"/><stop offset=".55" stop-color="#B9A6EC"/><stop offset="1" stop-color="#8E7BD8"/>
+          </radialGradient>
+          <!-- crescent = circle minus an offset circle. The lit side always faces
+               the full moon: waxing (left of centre) is lit on the right,
+               waning (right of centre) is lit on the left. Thickness grows toward
+               the full moon; the innermost pair is bold like the logo crescent. -->
+          <mask id="cr0"><circle cx="100" cy="110" r="46" fill="#fff"/><circle cx="84" cy="110" r="48" fill="#000"/></mask>
+          <mask id="cr1"><circle cx="250" cy="110" r="46" fill="#fff"/><circle cx="220" cy="110" r="48" fill="#000"/></mask>
+          <mask id="cr2"><circle cx="400" cy="110" r="46" fill="#fff"/><circle cx="356" cy="110" r="48" fill="#000"/></mask>
+          <mask id="cr4"><circle cx="700" cy="110" r="46" fill="#fff"/><circle cx="744" cy="110" r="48" fill="#000"/></mask>
+          <mask id="cr5"><circle cx="850" cy="110" r="46" fill="#fff"/><circle cx="880" cy="110" r="48" fill="#000"/></mask>
+          <mask id="cr6"><circle cx="1000" cy="110" r="46" fill="#fff"/><circle cx="1016" cy="110" r="48" fill="#000"/></mask>
+          <linearGradient id="goldline" gradientUnits="userSpaceOnUse" x1="100" y1="110" x2="1000" y2="110">
+            <stop offset="0" stop-color="#E9D9A8"/><stop offset=".5" stop-color="#F5E7C0"/><stop offset="1" stop-color="#E9D9A8"/>
+          </linearGradient>
+        </defs>
+        <!-- filigree gold line, centred on the moons, drawn first so it sits behind them -->
+        <g>
+          <line x1="100" y1="110" x2="1000" y2="110" stroke="url(#goldline)" stroke-width="1.6"/>
+          <path d="M100 97 102.3 106.1 111.3 103.5 104.5 110 111.3 116.5 102.3 113.9 100 123 97.7 113.9 88.7 116.5 95.5 110 88.7 103.5 97.7 106.1Z" fill="#E9D9A8"/>
+          <path d="M1000 97 1002.3 106.1 1011.3 103.5 1004.5 110 1011.3 116.5 1002.3 113.9 1000 123 997.7 113.9 988.7 116.5 995.5 110 988.7 103.5 997.7 106.1Z" fill="#E9D9A8"/>
+        </g>
+        <!-- straight moon-phase row: waxing -> full -> waning -->
+        <g>
+          <circle cx="100" cy="110" r="46" fill="url(#mphase)" mask="url(#cr0)"/>
+          <circle cx="250" cy="110" r="46" fill="url(#mphase)" mask="url(#cr1)"/>
+          <circle cx="400" cy="110" r="46" fill="url(#mphase)" mask="url(#cr2)"/>
+          <circle cx="550" cy="110" r="52" fill="url(#mfull)"/>
+          <circle cx="700" cy="110" r="46" fill="url(#mphase)" mask="url(#cr4)"/>
+          <circle cx="850" cy="110" r="46" fill="url(#mphase)" mask="url(#cr5)"/>
+          <circle cx="1000" cy="110" r="46" fill="url(#mphase)" mask="url(#cr6)"/>
+          <path class="spark" data-d=".05" d="M40 30 l3.5 9 9 3.5 -9 3.5 -3.5 9 -3.5 -9 -9 -3.5 9 -3.5Z" fill="#C9B8F0"/>
+          <path class="spark" data-d=".035" d="M790 34 l3 7.5 7.5 3 -7.5 3 -3 7.5 -3 -7.5 -7.5 -3 7.5 -3Z" fill="#E39EC4"/>
+          <path class="spark" data-d=".028" d="M1063 45 l2.5 6.5 6.5 2.5 -6.5 2.5 -2.5 6.5 -2.5 -6.5 -6.5 -2.5 6.5 -2.5Z" fill="#C9B8F0"/>
+          <path class="spark" data-d=".042" d="M250 36 l3 7.5 7.5 3 -7.5 3 -3 7.5 -3 -7.5 -7.5 -3 7.5 -3Z" fill="#F5D6E6"/>
+          <path class="spark" data-d=".025" d="M630 196 l2.5 6.5 6.5 2.5 -6.5 2.5 -2.5 6.5 -2.5 -6.5 -6.5 -2.5 6.5 -2.5Z" fill="#C9B8F0"/>
+          <path class="spark" data-d=".038" d="M955 178 l3 7.5 7.5 3 -7.5 3 -3 7.5 -3 -7.5 -7.5 -3 7.5 -3Z" fill="#E39EC4"/>
+          <path class="spark" data-d=".03" d="M25 170 l2.5 6.5 6.5 2.5 -6.5 2.5 -2.5 6.5 -2.5 -6.5 -6.5 -2.5 6.5 -2.5Z" fill="#B9A6EC"/>
+          <path class="spark" data-d=".018" d="M500 24 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2Z" fill="#F5D6E6"/>
+          <path class="spark" data-d=".02" d="M470 175 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2Z" fill="#C9B8F0"/>
+        </g>
+      </svg>
+
+      <div class="hero-foot reveal">
+        <p class="desc">Direkt aus dem Herzen Tokios und dem Crystal Palace</p>
+        <button class="copy-mail" id="copyMail" title="E-Mail kopieren">
+          <span id="mailText">HELLO<span style="color:#E39EC4">@</span>MOONLIGHT.AGENCY</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ CLIENTS ============ -->
+<section class="clients">
+  <div class="wrap">
+    <span class="eyebrow reveal">Unsere Kunden</span>
+    <h2 class="reveal">Wir genießen das Vertrauen von Tokios führenden Unternehmen</h2>
+    <div class="client-row reveal">
+      <span>Crystal Tokyo Hotels</span><span class="s">✦</span><span>Crown Game Center</span><span class="s">✦</span><span>Osa·P Jewels</span><span class="s">✦</span><span>Fruits Parlor Crown</span><span class="s">✦</span><span>Ginga TV</span><span class="s">✦</span><span>Jūban Verlagshaus</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REEL MARQUEE ============ -->
+<div class="reel" aria-hidden="true">
+  <div class="reel-track">
+    <defs><linearGradient id="moon-grad" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#E39EC4"/><stop offset="1" stop-color="#E9D9A8"/></linearGradient></defs>
+    <span>Im Namen des Mondes <i class="m"><svg viewBox="0 0 32 32" fill="none" width="1em" height="1em"><defs><linearGradient id="mg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#E39EC4"/><stop offset="1" stop-color="#E9D9A8"/></linearGradient></defs><path d="M22 3.5A13.5 13.5 0 1 0 28.5 22 11 11 0 0 1 22 3.5Z" fill="url(#mg)"/></svg></i> Im Namen des Mondes <i class="m"><svg viewBox="0 0 32 32" fill="none" width="1em" height="1em"><defs><linearGradient id="mg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#E39EC4"/><stop offset="1" stop-color="#E9D9A8"/></linearGradient></defs><path d="M22 3.5A13.5 13.5 0 1 0 28.5 22 11 11 0 0 1 22 3.5Z" fill="url(#mg)"/></svg></i></span><span>Im Namen des Mondes <i class="m"><svg viewBox="0 0 32 32" fill="none" width="1em" height="1em"><defs><linearGradient id="mg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#E39EC4"/><stop offset="1" stop-color="#E9D9A8"/></linearGradient></defs><path d="M22 3.5A13.5 13.5 0 1 0 28.5 22 11 11 0 0 1 22 3.5Z" fill="url(#mg)"/></svg></i> Im Namen des Mondes <i class="m"><svg viewBox="0 0 32 32" fill="none" width="1em" height="1em"><defs><linearGradient id="mg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#E39EC4"/><stop offset="1" stop-color="#E9D9A8"/></linearGradient></defs><path d="M22 3.5A13.5 13.5 0 1 0 28.5 22 11 11 0 0 1 22 3.5Z" fill="url(#mg)"/></svg></i></span><span>Im Namen des Mondes <i class="m"><svg viewBox="0 0 32 32" fill="none" width="1em" height="1em"><defs><linearGradient id="mg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#E39EC4"/><stop offset="1" stop-color="#E9D9A8"/></linearGradient></defs><path d="M22 3.5A13.5 13.5 0 1 0 28.5 22 11 11 0 0 1 22 3.5Z" fill="url(#mg)"/></svg></i> Im Namen des Mondes <i class="m"><svg viewBox="0 0 32 32" fill="none" width="1em" height="1em"><defs><linearGradient id="mg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#E39EC4"/><stop offset="1" stop-color="#E9D9A8"/></linearGradient></defs><path d="M22 3.5A13.5 13.5 0 1 0 28.5 22 11 11 0 0 1 22 3.5Z" fill="url(#mg)"/></svg></i></span><span>Im Namen des Mondes <i class="m"><svg viewBox="0 0 32 32" fill="none" width="1em" height="1em"><defs><linearGradient id="mg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#E39EC4"/><stop offset="1" stop-color="#E9D9A8"/></linearGradient></defs><path d="M22 3.5A13.5 13.5 0 1 0 28.5 22 11 11 0 0 1 22 3.5Z" fill="url(#mg)"/></svg></i> Im Namen des Mondes <i class="m"><svg viewBox="0 0 32 32" fill="none" width="1em" height="1em"><defs><linearGradient id="mg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#E39EC4"/><stop offset="1" stop-color="#E9D9A8"/></linearGradient></defs><path d="M22 3.5A13.5 13.5 0 1 0 28.5 22 11 11 0 0 1 22 3.5Z" fill="url(#mg)"/></svg></i></span><span>Im Namen des Mondes <i class="m"><svg viewBox="0 0 32 32" fill="none" width="1em" height="1em"><defs><linearGradient id="mg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#E39EC4"/><stop offset="1" stop-color="#E9D9A8"/></linearGradient></defs><path d="M22 3.5A13.5 13.5 0 1 0 28.5 22 11 11 0 0 1 22 3.5Z" fill="url(#mg)"/></svg></i> Im Namen des Mondes <i class="m"><svg viewBox="0 0 32 32" fill="none" width="1em" height="1em"><defs><linearGradient id="mg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#E39EC4"/><stop offset="1" stop-color="#E9D9A8"/></linearGradient></defs><path d="M22 3.5A13.5 13.5 0 1 0 28.5 22 11 11 0 0 1 22 3.5Z" fill="url(#mg)"/></svg></i></span><span>Im Namen des Mondes <i class="m"><svg viewBox="0 0 32 32" fill="none" width="1em" height="1em"><defs><linearGradient id="mg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#E39EC4"/><stop offset="1" stop-color="#E9D9A8"/></linearGradient></defs><path d="M22 3.5A13.5 13.5 0 1 0 28.5 22 11 11 0 0 1 22 3.5Z" fill="url(#mg)"/></svg></i> Im Namen des Mondes <i class="m"><svg viewBox="0 0 32 32" fill="none" width="1em" height="1em"><defs><linearGradient id="mg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#E39EC4"/><stop offset="1" stop-color="#E9D9A8"/></linearGradient></defs><path d="M22 3.5A13.5 13.5 0 1 0 28.5 22 11 11 0 0 1 22 3.5Z" fill="url(#mg)"/></svg></i></span><span>Im Namen des Mondes <i class="m"><svg viewBox="0 0 32 32" fill="none" width="1em" height="1em"><defs><linearGradient id="mg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#E39EC4"/><stop offset="1" stop-color="#E9D9A8"/></linearGradient></defs><path d="M22 3.5A13.5 13.5 0 1 0 28.5 22 11 11 0 0 1 22 3.5Z" fill="url(#mg)"/></svg></i> Im Namen des Mondes <i class="m"><svg viewBox="0 0 32 32" fill="none" width="1em" height="1em"><defs><linearGradient id="mg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#E39EC4"/><stop offset="1" stop-color="#E9D9A8"/></linearGradient></defs><path d="M22 3.5A13.5 13.5 0 1 0 28.5 22 11 11 0 0 1 22 3.5Z" fill="url(#mg)"/></svg></i></span><span>Im Namen des Mondes <i class="m"><svg viewBox="0 0 32 32" fill="none" width="1em" height="1em"><defs><linearGradient id="mg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#E39EC4"/><stop offset="1" stop-color="#E9D9A8"/></linearGradient></defs><path d="M22 3.5A13.5 13.5 0 1 0 28.5 22 11 11 0 0 1 22 3.5Z" fill="url(#mg)"/></svg></i> Im Namen des Mondes <i class="m"><svg viewBox="0 0 32 32" fill="none" width="1em" height="1em"><defs><linearGradient id="mg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#E39EC4"/><stop offset="1" stop-color="#E9D9A8"/></linearGradient></defs><path d="M22 3.5A13.5 13.5 0 1 0 28.5 22 11 11 0 0 1 22 3.5Z" fill="url(#mg)"/></svg></i></span>
+  </div>
+</div>
+
+<!-- ============ WORK ============ -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head sec-head-stack">
+      <span class="eyebrow reveal">Ausgewählte Projekte</span>
+      <h2 class="reveal">Katastrophen, verwandelt mit ehrgeizigen Marken &amp; mutigen Teams</h2>
+      <p class="lede reveal">Fünf Fälle, die vor unserem Einsatz aussichtslos schienen — und danach als Referenz durch Tokio gingen. Von der Pressekonferenz nach dem Skandal bis zur kompletten Neuerfindung einer Marke.</p>
+      <a href="#contact" class="btn reveal">Kennenlern-Termin buchen</a>
+    </div>
+
+    <div class="collage">
+      <div class="col col-l">
+        <a class="proj reveal" href="#contact">
+          <span class="proj-num" aria-hidden="true">02</span>
+          <div class="proj-frame">
+            <div class="proj-art">
+              <div class="art-inner" style="background:linear-gradient(160deg,rgba(249,230,239,.72),rgba(240,203,223,.72) 55%,rgba(217,182,232,.72)),url('img/2.webp') center/cover">
+                <span class="tiny" style="top:15%;left:0;right:0;text-align:center;color:#9C6FB8">Einladung · 1.200 Gäste</span>
+                <span class="big" style="color:#5F4E9E">Crystal<br>Tokyo<br><em>Gala</em></span>
+                <span class="tiny" style="bottom:15%;left:0;right:0;text-align:center;color:#9C6FB8">☾ Null Zwischenfälle</span>
+              </div>
+            </div>
+          </div>
+          <div class="proj-title">Crystal Tokyo Gala</div>
+          <p class="proj-desc">1.200 Gäste, drei verfeindete Vorstände, ein ungebetener Gast. Ergebnis: null Zwischenfälle, vier Versöhnungen, Rührungsgarantie eingelöst.</p>
+          <div class="tags"><span class="tag">Event</span><span class="tag">Security</span></div>
+        </a>
+        <a class="proj sm reveal" href="#contact">
+          <span class="proj-num" aria-hidden="true">04</span>
+          <div class="proj-frame">
+            <div class="proj-art">
+              <div class="art-inner" style="background:linear-gradient(160deg,rgba(27,36,64,.72),rgba(46,58,110,.72) 60%,rgba(122,155,216,.72)),url('img/4.webp') center/cover">
+                <span class="tiny" style="top:15%;left:0;right:0;text-align:center;color:#B9C3EE">Ginga TV · Studio 3</span>
+                <span class="big" style="color:#F9F8F6">On Air:<br><em>Die</em><br>Wahrheit</span>
+                <span class="tiny" style="bottom:15%;left:0;right:0;text-align:center;color:#B9C3EE">● REC — Montag, 9:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="proj-title">Ginga TV Pressekonferenz</div>
+          <p class="proj-desc">Skandal am Freitag, Pressekonferenz am Montag, Sympathiewerte auf Allzeithoch am Dienstag. Drei Journalisten weinten — vor Rührung.</p>
+          <div class="tags"><span class="tag">PR</span><span class="tag">Deeskalation</span></div>
+        </a>
+      </div>
+      <div class="col col-r">
+        <a class="proj sm reveal" href="#contact">
+          <span class="proj-num" aria-hidden="true">01</span>
+          <div class="proj-frame">
+            <div class="proj-art">
+              <div class="art-inner" style="background:linear-gradient(160deg,rgba(42,21,38,.72),rgba(78,36,64,.72) 55%,rgba(176,114,143,.72)),url('img/1.webp') center/cover">
+                <span class="tiny" style="top:15%;left:0;right:0;text-align:center;color:#E8BFD3">Akte 01 · Vertraulich</span>
+                <span class="big" style="color:#F9F8F6">Dark<br>Kingdom<br><em>Reorg.</em></span>
+                <span class="tiny" style="bottom:15%;left:0;right:0;text-align:center;color:#E8BFD3">Akuryo Taisan ✦</span>
+              </div>
+            </div>
+          </div>
+          <div class="proj-title">Dark Kingdom Reorganisation</div>
+          <p class="proj-desc">Toxische Unternehmenskultur, cholerische Führungsetage, akuter Energieverlust — nach sechs Wochen: versöhnte Chefetage.</p>
+          <div class="tags"><span class="tag">Krisenmanagement</span><span class="tag">Reboot</span></div>
+        </a>
+        <a class="proj reveal" href="#contact">
+          <span class="proj-num" aria-hidden="true">03</span>
+          <div class="proj-frame">
+            <div class="proj-art">
+              <div class="art-inner" style="background:linear-gradient(160deg,rgba(253,239,245,.72),rgba(246,198,222,.72) 60%,rgba(227,158,196,.72)),url('img/3.webp') center/cover">
+                <span class="tiny" style="top:15%;left:0;right:0;text-align:center;color:#B85F93">Neue Kollektion</span>
+                <span class="big" style="color:#8A3B68">Osa·P<br><em>Jewels</em></span>
+                <span class="tiny" style="bottom:15%;left:0;right:0;text-align:center;color:#B85F93">✦ Jetzt auf der Warteliste</span>
+              </div>
+            </div>
+          </div>
+          <div class="proj-title">Osa·P Jewels Rebranding</div>
+          <p class="proj-desc">Nach dem dritten Monster-Vorfall war das Image ruiniert. Heute: Wartelisten für die neue Kollektion, zwei Wochen in den Trends.</p>
+          <div class="tags"><span class="tag">Branding</span><span class="tag">Social Media</span></div>
+        </a>
+        <a class="proj sm reveal" href="#contact">
+          <span class="proj-num" aria-hidden="true">05</span>
+          <div class="proj-frame">
+            <div class="proj-art">
+              <div class="art-inner" style="background:linear-gradient(160deg,rgba(23,18,38,.72),rgba(51,37,78,.72) 55%,rgba(110,91,184,.72)),url('img/5.webp') center/cover">
+                <span class="tiny" style="top:15%;left:0;right:0;text-align:center;color:#C9B8F0">Dead Moon</span>
+                <span class="big" style="color:#F9F8F6">Im Glanz<br>des<br><em>Lichtes</em></span>
+                <span class="tiny" style="bottom:15%;left:0;right:0;text-align:center;color:#C9B8F0">Artist-Transformation · Premium</span>
+              </div>
+            </div>
+          </div>
+          <div class="proj-title">Dead Moon Transformation</div>
+          <p class="proj-desc">Ein legendärer Dunkelbund-Zirkus wird zur weltklasse Cirque-du-Soleil-Production transformiert. Künstler-Neuschulung, LED-Lichttechnik, Sounddesign, komplette visuelle Neuausrichtung. Premiere: 12.000 Zuschauer, 47 Standing Ovations.</p>
+          <div class="tags"><span class="tag">Brand Transformation</span><span class="tag">Silberkristall Retainer</span></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GUARDIANS (wheel) ============ -->
+<section id="guardians" class="wheel-sec">
+  <div class="wheel-sticky">
+    <div class="wheel-head">
+      <span class="eyebrow">Die Abteilungen</span>
+      <h2>Fünf Wächterinnen,<br>ein Versprechen</h2>
+      <p class="lede">Jede Abteilung wird von einer Spezialistin geführt, deren Talente Sie sonst nirgendwo buchen können. <span class="hint-scroll">Scrollen Sie weiter — das Rad dreht sich.</span><span class="hint-swipe">Wischen Sie durch die Abteilungen.</span></p>
+      <div class="wheel-progress" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+    </div>
+
+    <!-- identical copy in white, clipped to whatever dark card sits behind it -->
+    <div class="wheel-head wheel-head-light" aria-hidden="true">
+      <span class="eyebrow">Die Abteilungen</span>
+      <h2>Fünf Wächterinnen,<br>ein Versprechen</h2>
+      <p class="lede">Jede Abteilung wird von einer Spezialistin geführt, deren Talente Sie sonst nirgendwo buchen können. <span class="hint-scroll">Scrollen Sie weiter — das Rad dreht sich.</span><span class="hint-swipe">Wischen Sie durch die Abteilungen.</span></p>
+      <div class="wheel-progress"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+    </div>
+
+    <article class="wcard" style="--g:linear-gradient(135deg,#F6C6DE,#E9D9A8);--gt:linear-gradient(135deg,rgba(246,198,222,.42),rgba(233,217,168,.42))">
+      <div class="wcard-top">
+        <span class="guard-sigil"><img src="img/usagi.webp" alt="" width="56" height="56" loading="lazy" decoding="async"></span>
+        <div><h3>Usagi Tsukino</h3><div class="role">Chief Empathy Officer · PR</div></div>
+      </div>
+      <p>Unendliche Empathie und die Fähigkeit, selbst verfeindete Geschäftspartner zum Weinen und Versöhnen zu bringen. Sie hält die Eröffnungsreden, moderiert Deeskalationen und leitet Pressekonferenzen nach Skandalen. Wenn sie redet, schmilzt jeder Kunde dahin.</p>
+      <div class="quirk"><b>Interne Notiz:</b> Büro mit fest eingebautem Nickerchen-Sofa. Onboarding verzögert sich planmäßig um 30 Minuten — Stau, oder es musste noch ein Hörnchen gegessen werden.</div>
+      <div class="tags"><span class="tag">Reden</span><span class="tag">Deeskalation</span><span class="tag">Rührungsgarantie</span></div>
+    </article>
+
+    <article class="wcard" style="--g:linear-gradient(135deg,#D9EAF6,#B9C3EE);--gt:linear-gradient(135deg,rgba(217,234,246,.42),rgba(185,195,238,.42))">
+      <div class="wcard-top">
+        <span class="guard-sigil"><img src="img/ami.webp" alt="" width="56" height="56" loading="lazy" decoding="async"></span>
+        <div><h3>Ami Mizuno</h3><div class="role">CTO · Data Analytics</div></div>
+      </div>
+      <p>IQ 300, analytische Kälte unter Druck. Ami baut die Algorithmen für Risikoanalysen, programmiert die Firmensoftware, wertet Marktanalysen mit ihrem Supercomputer aus und liefert 500-seitige Reports — fehlerfrei.</p>
+      <div class="quirk"><b>Interne Notiz:</b> Versucht seit Jahren, Usagi beizubringen, wie man ein PDF speichert. Sämtliche Firewalls tragen Namen von Lernsoftware.</div>
+      <div class="tags"><span class="tag">Analytics</span><span class="tag">Reports</span><span class="tag">Software</span></div>
+    </article>
+
+    <article class="wcard" style="--g:linear-gradient(135deg,#F8CFCB,#E39EC4);--gt:linear-gradient(135deg,rgba(248,207,203,.42),rgba(227,158,196,.42))">
+      <div class="wcard-top">
+        <span class="guard-sigil"><img src="img/rei.webp" alt="" width="56" height="56" loading="lazy" decoding="async"></span>
+        <div><h3>Rei Hino</h3><div class="role">Chief Risk Officer · Spiritual QA</div></div>
+      </div>
+      <p>Hellseherische Prognosen und Vibe-Checks für Verträge: Vor jeder Unterschrift wandern Mantras ins Feuer — bei schlechtem Gefühl wird der Deal gecancelt. Übernimmt außerdem das Beschwerdemanagement, wahlweise mit Anekdoten über Dämonenaustreibung.</p>
+      <div class="quirk"><b>Interne Notiz:</b> Versiegelt cholerische Kunden und schlechte Bilanzen wörtlich mit Ofuda-Talismanen. „Akuryo Taisan!“</div>
+      <div class="tags"><span class="tag">Vibe-Check</span><span class="tag">Prognosen</span><span class="tag">Ofuda</span></div>
+    </article>
+
+    <article class="wcard" style="--g:linear-gradient(135deg,#DCEEDC,#A8D8B9);--gt:linear-gradient(135deg,rgba(220,238,220,.42),rgba(168,216,185,.42))">
+      <div class="wcard-top">
+        <span class="guard-sigil"><img src="img/makoto.webp" alt="" width="56" height="56" loading="lazy" decoding="async"></span>
+        <div><h3>Makoto Kino</h3><div class="role">Catering, Facilities &amp; Security</div></div>
+      </div>
+      <p>Bärenstarke Physis, botanisches Wissen, meisterhafte Kochkunst. Ihre Bentōs und Torten schließen Deals schneller ab als jeder Anwalt. Bei unebenen Tischen oder säumigen Zahlern geht Mako kurz persönlich vorbei.</p>
+      <div class="quirk"><b>Interne Notiz:</b> Jedes Buffet sieht aus wie für eine Traumhochzeit. Bei jedem neuen Kunden: „Er erinnert mich ein bisschen an meinen Ex-Freund …“</div>
+      <div class="tags"><span class="tag">Catering</span><span class="tag">Security</span><span class="tag">Facilities</span></div>
+    </article>
+
+    <article class="wcard" style="--g:linear-gradient(135deg,#FBE9D2,#E9D9A8);--gt:linear-gradient(135deg,rgba(251,233,210,.42),rgba(233,217,168,.42))">
+      <div class="wcard-top">
+        <span class="guard-sigil"><img src="img/minako.webp" alt="" width="56" height="56" loading="lazy" decoding="async"></span>
+        <div><h3>Minako Aino</h3><div class="role">CMO · Brand Ambassador</div></div>
+      </div>
+      <p>Idol-Erfahrung, Stilsicherheit, Medien-Gespür. Minako verantwortet Brand-Design und Social-Media-Kampagnen, weiß genau, was sich verkauft, und inszeniert jedes Firmen-Event wie eine Stadion-Tournee.</p>
+      <div class="quirk"><b>Interne Notiz:</b> Baut in jede Kampagne ein Foto von sich selbst ein und verwechselt in Meetings Sprichwörter. Wird laufend von Artemis korrigiert.</div>
+      <div class="tags"><span class="tag">Branding</span><span class="tag">Social Media</span><span class="tag">Kampagnen</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="tight-top">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow reveal">Leistungen</span>
+        <h2 class="reveal">Wofür wir kämpfen</h2>
+      </div>
+    </div>
+    <div class="svc-list">
+      <div class="svc reveal">
+        <h3>High-Class Eventplanung</h3>
+        <p>Galas, Hochzeiten und Launches — inszeniert wie eine Stadion-Tournee, verpflegt wie eine Traumhochzeit, abgesichert wie ein Staatsbesuch.</p>
+        <div class="tags"><span class="tag">Show-Regie</span><span class="tag">Catering</span><span class="tag">Security</span></div>
+      </div>
+      <div class="svc reveal">
+        <h3>Krisenmanagement &amp; PR</h3>
+        <p>Deeskalations-Gespräche, Versöhnungs-Moderation und Pressekonferenzen, bei denen selbst Ihre Gegner zum Taschentuch greifen.</p>
+        <div class="tags"><span class="tag">Deeskalation</span><span class="tag">Pressearbeit</span><span class="tag">Rührungsgarantie</span></div>
+      </div>
+      <div class="svc reveal">
+        <h3>Marken-Transformation</h3>
+        <p>Vom Image-Desaster zur Trend-Marke: Positionierung, Brand-Design und Kampagnen mit echtem Idol-Instinkt für das, was sich verkauft.</p>
+        <div class="tags"><span class="tag">Branding</span><span class="tag">Social Media</span><span class="tag">Kampagnen</span></div>
+      </div>
+      <div class="svc reveal">
+        <h3>Risikoanalyse &amp; Data</h3>
+        <p>Marktanalysen per Supercomputer, Risikoalgorithmen und 500-seitige Reports ohne einen einzigen Tippfehler.</p>
+        <div class="tags"><span class="tag">Analytics</span><span class="tag">Reports</span><span class="tag">Software</span></div>
+      </div>
+      <div class="svc reveal">
+        <h3>Spiritual Quality Assurance</h3>
+        <p>Zukunfts-Prognosen, Vertrags-Vibe-Checks am heiligen Feuer und die Versiegelung toxischer Energien — im Meetingraum wie in der Bilanz.</p>
+        <div class="tags"><span class="tag">Vibe-Check</span><span class="tag">Prognosen</span><span class="tag">Ofuda</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow reveal">So arbeiten wir</span>
+        <h2 class="reveal">Von der Katastrophe zur<br>Klarheit in 3 Schritten</h2>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="n">1</div>
+        <h3>Vibe-Check</h3>
+        <p>Rei liest das Feuer, Ami liest die Daten. Nach 48 Stunden wissen wir mehr über Ihr Projekt als Ihr Aufsichtsrat — inklusive der Dinge, die niemand ausspricht.</p>
+      </div>
+      <div class="step reveal">
+        <div class="n">2</div>
+        <h3>Strategie</h3>
+        <p>Toxische Muster werden versiegelt, Chancen priorisiert. Sie erhalten einen sekundengenauen Zeitplan, ein Buffet-Konzept und die Tränen-Choreografie für die Abschlussrede.</p>
+      </div>
+      <div class="step reveal">
+        <div class="n">3</div>
+        <h3>Verwandlung</h3>
+        <p>Das volle Team tritt an. Aus Ihrer Krise wird ein Ereignis, aus Ihrer Marke ein Versprechen — und aus Ihren Gegnern Menschen, die bei Ihrer Rede weinen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section id="pricing" class="tight-top">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow reveal">Pakete</span>
+        <h2 class="reveal">Wählen Sie das Paket,<br>das Ihre Lage verdient</h2>
+      </div>
+    </div>
+    <div class="price-grid">
+      <div class="price reveal">
+        <h3>Mondstein-Reboot</h3>
+        <p class="price-desc">Für Firmen kurz vor dem Bankrott: Wir drehen Ihr Unternehmen einmal um die eigene Achse — und stellen es glänzend wieder hin.</p>
+        <ul>
+          <li>Finanz-Optimierung &amp; 500-Seiten-Report (Ami)</li>
+          <li>Austreibung toxischer Unternehmenskultur (Rei)</li>
+          <li>Kraft-Buffets für die Belegschaft (Mako)</li>
+          <li>Versöhnung der Chefetage (Usagi)</li>
+          <li>Neupositionierung der Marke (Minako)</li>
+        </ul>
+        <div class="price-amount">12.000&thinsp;€ <small>/ Programm</small></div>
+        <a href="#contact" class="btn">Mondstein-Reboot anfragen</a>
+      </div>
+
+      <div class="price dark reveal">
+        <h3>Liebe &amp; Justiz</h3>
+        <p class="price-desc">Die perfekte Hochzeit oder Firmen-Gala: bombastisch, sekundengenau, sicher — und garantiert keine trockenen Augen im Saal.</p>
+        <ul>
+          <li>Bombastisches Styling &amp; Show-Regie (Minako)</li>
+          <li>Zeitplanung auf die Sekunde (Ami)</li>
+          <li>Schutz vor ungebetenen Gästen (Mako &amp; Rei)</li>
+          <li>Traumhochzeits-Catering inkl. Torte (Mako)</li>
+          <li>Die Rede. Rührungsgarantie. (Usagi)</li>
+        </ul>
+        <div class="price-amount">24.000&thinsp;€ <small>/ Event</small></div>
+        <a href="#contact" class="btn">Liebe &amp; Justiz anfragen</a>
+      </div>
+
+      <div class="price reveal">
+        <h3>Silberkristall Retainer</h3>
+        <p class="price-desc">Für Marken, die dauerhaft unter dem Schutz des Mondes stehen wollen. Monatlich kündbar — wollte aber noch nie jemand.</p>
+        <ul>
+          <li>Monatlicher Vibe-Check Ihrer Verträge (Rei)</li>
+          <li>Laufende Markt- &amp; Risikoanalysen (Ami)</li>
+          <li>Social Media &amp; Trend-Radar (Minako)</li>
+          <li>Quartals-Buffet für Ihr Team (Mako)</li>
+          <li>Notfall-Hotline für Eskalationen (Usagi)</li>
+        </ul>
+        <div class="price-amount">5.000&thinsp;€ <small>/ Monat</small></div>
+        <a href="#contact" class="btn">Retainer anfragen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VOICES + STATS ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head sec-head-center">
+      <div>
+        <span class="eyebrow reveal">Kundenstimmen</span>
+        <h2 class="reveal">Sie kamen mit Krisen,<br>sie gingen mit Tränen</h2>
+      </div>
+    </div>
+    <div class="quote-grid">
+      <div class="quote reveal">
+        <div class="quote-inner" style="--img:url('img/furuhata.webp');--face:url('img/furuhata-face.webp')">
+          <span class="face" aria-hidden="true"></span>
+          <p>„Unsere Vorstände haben drei Jahre nicht miteinander gesprochen. Nach zwanzig Minuten mit Frau Tsukino lagen sie sich weinend in den Armen.“</p>
+          <div class="who"><b>M. Furuhata</b><span>Geschäftsführer, Crown Game Center</span></div>
+        </div>
+      </div>
+      <div class="quote reveal">
+        <div class="quote-inner" style="--img:url('img/osaka.webp');--face:url('img/osaka-face.webp')">
+          <span class="face" aria-hidden="true"></span>
+          <p>„Der Report hatte 512 Seiten und keinen einzigen Fehler. Unser Wirtschaftsprüfer hat gekündigt — sein Lebenswerk ergebe keinen Sinn mehr.“</p>
+          <div class="who"><b>M. Osaka</b><span>Inhaberin, Osa·P Jewels</span></div>
+        </div>
+      </div>
+      <div class="quote reveal">
+        <div class="quote-inner" style="--img:url('img/nehelenia.webp');--face:url('img/nehelenia-face.webp')">
+          <span class="face" aria-hidden="true"></span>
+          <p>„Meine Manege war ein wilder Dschungel — jede Truppe auf eigenen Ästen, niemand hörte auf den anderen. Heute turnt dasselbe Ensemble im selben Takt.“</p>
+          <div class="who"><b>Q. Nehelenia</b><span>Direktorin, Dead Moon Circus</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat reveal"><div class="num"><span class="count" data-to="200">0</span>+</div><div class="lbl">Gerettete Marken</div></div>
+      <div class="stat reveal"><div class="num"><span class="count" data-to="100">0</span>%</div><div class="lbl">Eingelöste Rührungsgarantien</div></div>
+      <div class="stat reveal"><div class="num"><span class="count" data-to="1000">0</span>+</div><div class="lbl">Jahre Erfahrung (inkl. Silbernes Millennium)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSIGHTS ============ -->
+<section class="tight-top">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow reveal">Insights</span>
+        <h2 class="reveal">Ideen, Einsichten<br>&amp; Prophezeiungen</h2>
+      </div>
+      <div class="post-nav reveal">
+        <button type="button" class="carousel-btn" data-dir="-1" aria-label="Vorherige Artikel">&#8592;</button>
+        <button type="button" class="carousel-btn" data-dir="1" aria-label="Nächste Artikel">&#8594;</button>
+        <button type="button" class="btn btn-light">Alle Artikel ansehen</button>
+      </div>
+    </div>
+    <div class="post-grid">
+      <a class="post reveal" href="#contact">
+        <span class="date">12. Juli 2026</span>
+        <h3>Warum gutes Krisenmanagement mit Zuhören beginnt — und mit Gebäck endet</h3>
+        <p>Was Deeskalation wirklich braucht: Empathie, Timing und die richtige Tortenauswahl.</p>
+        <span class="tag">Krisenmanagement</span>
+      </a>
+      <a class="post reveal" href="#contact">
+        <span class="date">28. Juni 2026</span>
+        <h3>Der Vertrags-Vibe-Check: Due Diligence für Fortgeschrittene</h3>
+        <p>Wie spirituelle Qualitätssicherung Deals rettet, bevor sie zu Problemen werden.</p>
+        <span class="tag">Risk</span>
+      </a>
+      <a class="post reveal" href="#contact">
+        <span class="date">9. Juni 2026</span>
+        <h3>Marken-Verwandlung: Vom Image-Desaster in die Trends</h3>
+        <p>Warum Transformation kein Rebranding ist, sondern eine Haltung. Mit Vorher-Nachher-Daten.</p>
+        <span class="tag">Branding</span>
+      </a>
+      <a class="post reveal" href="#contact">
+        <span class="date">24. Mai 2026</span>
+        <h3>Warum jedes Krisenteam eine Köchin braucht</h3>
+        <p>Verhandlungen scheitern selten an Zahlen. Meistens scheitern sie an leeren Mägen.</p>
+        <span class="tag">Facilities</span>
+      </a>
+      <a class="post reveal" href="#contact">
+        <span class="date">7. Mai 2026</span>
+        <h3>Datenanalyse für alle, die beim Wort Tabelle zusammenzucken</h3>
+        <p>Wie aus 500 Seiten Report drei Sätze werden, die eine Chefetage tatsächlich liest.</p>
+        <span class="tag">Data</span>
+      </a>
+      <a class="post reveal" href="#contact">
+        <span class="date">19. April 2026</span>
+        <h3>Feuerprobe: Was wir prüfen, bevor ein Vertrag unterschrieben wird</h3>
+        <p>Zwischen Bilanz und Bauchgefühl liegt ein Prüfverfahren. Wir erklären, wie es funktioniert.</p>
+        <span class="tag">Risk</span>
+      </a>
+      <a class="post reveal" href="#contact">
+        <span class="date">2. April 2026</span>
+        <h3>Reichweite aufbauen, ohne die Marke zu verkaufen</h3>
+        <p>Sichtbarkeit ist billig zu haben. Glaubwürdige Sichtbarkeit kostet Haltung.</p>
+        <span class="tag">Social Media</span>
+      </a>
+      <a class="post reveal" href="#contact">
+        <span class="date">15. März 2026</span>
+        <h3>Die Drei-Uhr-nachts-Regel für Pressemitteilungen</h3>
+        <p>Kein Statement verlässt das Haus, das nicht auch am nächsten Morgen noch trägt.</p>
+        <span class="tag">PR</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="tight-top">
+  <div class="wrap">
+    <div class="faq-wrap">
+      <div>
+        <span class="eyebrow reveal">FAQ</span>
+        <h2 class="reveal">Fragen?<br>Wir sind für Sie da</h2>
+        <p class="lede reveal">Und falls Ihre Frage hier nicht dabei ist: Unsere Notfall-Hotline ist rund um die Uhr besetzt. Meistens.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button class="faq-q"><span class="n">1</span>Beginnt das Onboarding wirklich 30 Minuten später?<span class="chev">+</span></button>
+          <div class="faq-a"><p>Statistisch: ja. Unsere Chief Empathy Officer stand im Stau oder musste noch ein Hörnchen essen. Sie erhalten in der Wartezeit Tee und eines von Makos legendären Gebäckstücken — danach haben Sie die Verspätung vergessen. Alle vergessen sie.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span class="n">2</span>Was passiert, wenn der Vibe-Check negativ ausfällt?<span class="chev">+</span></button>
+          <div class="faq-a"><p>Dann wird der Deal gecancelt. Ohne Ausnahme. Wenn das Feuer Nein sagt, sagt die Agentur Nein. Bisher lag das Feuer in 100&nbsp;% der Fälle richtig — wir diskutieren nicht mehr mit dem Feuer.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span class="n">3</span>Ist die Rührungsgarantie rechtlich bindend?<span class="chev">+</span></button>
+          <div class="faq-a"><p>Ja. Weint bei der Abschlussrede kein einziger Gast, erstatten wir 10&nbsp;% des Paketpreises. Wurde noch nie in Anspruch genommen. Einmal war es knapp — dann kam die Geschichte mit dem Kater, und der Saal brach zusammen.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span class="n">4</span>Wie geht Ihre Security mit schwierigen Gästen um?<span class="chev">+</span></button>
+          <div class="faq-a"><p>Frau Kino spricht kurz mit dem Gast. Meist reicht das. In hartnäckigen Fällen wird ein Stuhl im Lounge-Bereich reserviert, wo man sich beruhigt und ein ausgezeichnetes Stück Torte genießt. Danach sind fast alle wieder im Griff.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span class="n">5</span>Können Sie kurzfristig übernehmen — der Skandal ist schon öffentlich?<span class="chev">+</span></button>
+          <div class="faq-a"><p>Dafür gibt es die Notfall-Hotline. Innerhalb von 24 Stunden steht die Pressekonferenz, innerhalb von 48 Stunden weinen die Journalisten vor Rührung. Bitte bis zu unserem Eintreffen keine eigenen Pressemitteilungen.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span class="n">6</span>Warum heißen Ihre Firewalls „Lernsoftware“?<span class="chev">+</span></button>
+          <div class="faq-a"><p>Eine Tradition unserer CTO. Angreifer, die „Vokabeltrainer-3“ für ein leichtes Ziel halten, treffen auf ein System, gebaut von einer Frau mit IQ 300. Durchschnittliche Verweildauer: 11 Sekunden — dann gibt es eine Übungsaufgabe.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta" id="contact">
+  <div class="wrap">
+    <div class="cta-card">
+      <div class="cta-visual" aria-hidden="true">
+        <svg viewBox="0 0 530 417" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <radialGradient id="ctaGlow" cx="62%" cy="42%" r="62%">
+              <stop offset="0" stop-color="#E39EC4" stop-opacity=".55"/>
+              <stop offset=".45" stop-color="#8E7BD8" stop-opacity=".32"/>
+              <stop offset="1" stop-color="#141414" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="ctaMoon" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#FDF0F7"/>
+              <stop offset=".5" stop-color="#E7CBF0"/>
+              <stop offset="1" stop-color="#B79AE0"/>
+            </linearGradient>
+          </defs>
+          <rect width="530" height="417" fill="url(#ctaGlow)"/>
+          <path d="M356 92a112 112 0 1 0 54 154 92 92 0 0 1-54-154Z" fill="url(#ctaMoon)" opacity=".92"/>
+          <g fill="#F4D58D">
+            <path d="M138 88l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" opacity=".9"/>
+            <path d="M452 300l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" opacity=".75"/>
+            <path d="M96 320l2.5 6.5 6.5 2.5-6.5 2.5-2.5 6.5-2.5-6.5-6.5-2.5 6.5-2.5z" opacity=".6"/>
+            <circle cx="196" cy="196" r="2" opacity=".5"/>
+            <circle cx="420" cy="120" r="1.6" opacity=".45"/>
+            <circle cx="270" cy="352" r="1.8" opacity=".4"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="cta-body">
+        <span class="cta-eyebrow"><i></i>Katastrophe → Gala</span>
+        <h2>Sie haben ein Desaster,<br>das <em>Glamour</em> verdient?</h2>
+        <a class="btn" href="mailto:hello@moonlight.agency">Termin buchen</a>
+      </div>
+
+      <div class="cta-foot">
+        <div class="cta-rule"></div>
+        <div class="cta-links">
+          <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7 8 8.2 12h-6.4l-5-7.3L5.9 22H2.8l7.5-8.6L2.4 2h6.6l4.5 6.6L18.9 2Zm-1.1 18h1.7L7.3 3.8H5.4L17.8 20Z"/></svg>Instagram</a>
+          <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm6 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97V21H9V9Z"/></svg>LinkedIn</a>
+          <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.6 6.9a8.3 8.3 0 0 1 1.8 5.05c-.3-.07-3.2-.65-6.1-.28-.07-.16-.13-.32-.2-.5-.18-.42-.38-.85-.58-1.26 3.2-1.3 4.66-3.18 4.7-3.24l.38.23ZM12 3.63c2.06 0 3.94.77 5.37 2.04-.05.07-1.36 1.83-4.45 2.98A42.7 42.7 0 0 0 9.85 4.0 8.4 8.4 0 0 1 12 3.63ZM8.1 4.65a50 50 0 0 1 3.05 4.6c-3.9 1.04-7.3 1.02-7.68 1.02a8.42 8.42 0 0 1 4.63-5.62ZM3.6 12v-.26c.36.01 4.37.06 8.5-1.18.24.46.46.93.67 1.4l-.33.1c-4.3 1.38-6.55 5.2-6.74 5.52A8.36 8.36 0 0 1 3.6 12ZM12 20.4a8.35 8.35 0 0 1-5.15-1.77c.15-.3 1.8-3.5 6.5-5.13l.06-.02a34.9 34.9 0 0 1 1.8 6.4A8.3 8.3 0 0 1 12 20.4Zm4.75-1.5a36.4 36.4 0 0 0-1.64-6.1c2.73-.44 5.12.27 5.42.37a8.4 8.4 0 0 1-3.78 5.73Z"/></svg>Behance</a>
+          <a href="mailto:hello@moonlight.agency"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>hello@moonlight.agency</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <span class="foot-copy">© 2026 Moonlight Agency, Jūban District, Tokio</span>
+      <span class="foot-copy">✦ Vom Mond bestrahlt, von fünf Wächterinnen betrieben ✦</span>
+      <span class="foot-copy">Dies ist eine Demo-Website ohne echten Geschäftsbetrieb.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* reveal on scroll */
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* copy mail */
+document.getElementById('copyMail').addEventListener('click',async()=>{
+  const el=document.getElementById('mailText'),old=el.innerHTML;
+  try{await navigator.clipboard.writeText('hello@moonlight.agency')}catch(e){}
+  el.textContent='Kopiert! ✦';
+  setTimeout(()=>el.innerHTML=old,1600);
+});
+
+/* faq accordion */
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.closest('.faq-item'),a=item.querySelector('.faq-a'),open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(o=>{
+      o.classList.remove('open');o.querySelector('.faq-a').style.maxHeight=null;
+    });
+    if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px'}
+  });
+});
+
+/* count-up stats */
+const cio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  cio.unobserve(e.target);
+  const el=e.target,to=+el.dataset.to,t0=performance.now(),dur=1400;
+  (function step(t){
+    const p=Math.min(1,(t-t0)/dur),ease=1-Math.pow(1-p,3);
+    el.textContent=Math.round(to*ease);
+    if(p<1)requestAnimationFrame(step);
+  })(t0);
+}),{threshold:.6});
+document.querySelectorAll('.count').forEach(el=>cio.observe(el));
+
+/* scroll parallax on project cards (orionix-style) */
+const px=[...document.querySelectorAll('.proj')].map(p=>({
+  p, inner:p.querySelector('.art-inner'), num:p.querySelector('.proj-num')
+}));
+let pxTick=false;
+function pxUpdate(){
+  pxTick=false;
+  const vh=innerHeight;
+  for(const {p,inner,num} of px){
+    const b=p.getBoundingClientRect();
+    if(b.bottom<-120||b.top>vh+120)continue;
+    const t=Math.max(-1,Math.min(1,(b.top+b.height/2-vh/2)/(vh/2+b.height/2)));
+    if(inner)inner.style.transform=`translateY(${(-t*8).toFixed(2)}%)`;
+    if(num)num.style.transform=`translateY(${(t*46).toFixed(1)}px)`;
+  }
+}
+function pxQueue(){if(!pxTick){pxTick=true;requestAnimationFrame(pxUpdate)}}
+
+/* hero sparkles drift at their own pace while scrolling — the smaller a star,
+   the further away it reads, so the less it moves */
+const sparks=[...document.querySelectorAll('.spark')].map(el=>({el,d:+el.dataset.d}));
+function sparkUpdate(){
+  const y=scrollY;
+  if(y>900)return;                       /* out of sight, nothing to update */
+  for(const {el,d} of sparks) el.style.transform=`translateY(${(y*d).toFixed(2)}px)`;
+}
+
+/* insights carousel: arrows scroll by one card, disabled at either end */
+const postRail=document.querySelector('.post-grid');
+const postBtns=[...document.querySelectorAll('.carousel-btn')];
+function postStep(){
+  const card=postRail.querySelector('.post');
+  return card ? card.getBoundingClientRect().width+16 : 320;
+}
+function postSync(){
+  const max=postRail.scrollWidth-postRail.clientWidth;
+  postBtns.forEach(b=>{
+    const dir=+b.dataset.dir;
+    b.disabled = dir<0 ? postRail.scrollLeft<=1 : postRail.scrollLeft>=max-1;
+  });
+}
+postBtns.forEach(b=>b.addEventListener('click',()=>{
+  postRail.scrollBy({left:+b.dataset.dir*postStep(),behavior:'smooth'});
+}));
+postRail.addEventListener('scroll',postSync,{passive:true});
+addEventListener('resize',postSync);
+postSync();
+
+/* guardians wheel: cards rotate in like on a big wheel while the stage is pinned */
+const wheelSec=document.querySelector('.wheel-sec');
+const wheelStage=document.querySelector('.wheel-sticky');
+const wcards=[...document.querySelectorAll('.wcard')];
+const wdots=[...document.querySelectorAll('.wheel-progress i')];
+const wheelHead=document.querySelector('.wheel-head');
+const wheelHeadLight=document.querySelector('.wheel-head-light');
+const WSTEP=26; /* degrees between cards */
+/* page and card colours, so the text can follow the real backdrop brightness */
+const PAGE_L=239, DARK_L=16;
+/* one white layer per card: several darkened cards can cover the text at once */
+const wlights=[wheelHeadLight];
+for(let i=1;i<wcards.length;i++){
+  const clone=wheelHeadLight.cloneNode(true);
+  wheelHeadLight.parentNode.appendChild(clone);
+  wlights.push(clone);
+}
+
+/* headline text box + origin of the white twin, both in stage coordinates */
+let headBox=null,lightBox=null;
+function measureHead(){
+  const st=wheelStage.getBoundingClientRect();
+  const h=wheelHead.querySelector('h2').getBoundingClientRect();
+  const l=wheelHead.querySelector('.lede').getBoundingClientRect();
+  headBox={
+    l:Math.min(h.left,l.left)-st.left, t:h.top-st.top,
+    r:Math.max(h.right,l.right)-st.left, b:l.bottom-st.top
+  };
+  headBox.area=Math.max(1,(headBox.r-headBox.l)*(headBox.b-headBox.t));
+  const lb=wheelHeadLight.getBoundingClientRect();
+  lightBox={l:lb.left-st.left, t:lb.top-st.top};
+}
+
+function wheelUpdate(){
+  if(matchMedia('(max-width: 900px)').matches){
+    /* below 900px the swipe wheel owns the cards; only the stacked
+       fallback needs the inline values cleared */
+    if(!mOn){
+      wcards.forEach(c=>{
+        c.style.transform='';c.style.visibility='';c.style.opacity='';c.style.zIndex='';
+        c.style.removeProperty('--dim');
+      });
+    }
+    wlights.forEach(L=>L.style.setProperty('--lit','0'));
+    return;
+  }
+  if(!headBox)measureHead();
+  const vh=innerHeight,vw=wheelStage.clientWidth;
+  const rect=wheelSec.getBoundingClientRect();
+  const scrollable=wheelSec.offsetHeight-vh;
+  const p=Math.max(0,Math.min(1,-rect.top/scrollable));
+  const wheelAngle=p*WSTEP*(wcards.length-1);
+  const R=Math.max(vh*.85,560);
+  const cx=Math.min(vw*.64,vw-260), cy=vh/2+R;
+  let active=0,best=1e9;
+  wcards.forEach((c,i)=>{
+    const deg=i*WSTEP-wheelAngle;
+    const a=deg*Math.PI/180;
+    const w=c.offsetWidth,h=c.offsetHeight;
+    const x=cx+R*Math.sin(a)-w/2;
+    const y=cy-R*Math.cos(a)-h/2;
+    const ad=Math.abs(deg);
+    /* cards leaving to the left darken, then fade out as they go */
+    const span=deg<0?WSTEP*1.45:WSTEP*2.2;
+    const shown=ad<span;
+    const op=Math.max(0,1-Math.pow(ad/span,deg<0?4:2));
+    const dim=deg<0?Math.min(.93,Math.pow(ad/(WSTEP*.62),1.7)*.95):0;
+    c.style.visibility=shown?'visible':'hidden';
+    c.style.opacity=String(op);
+    c.style.setProperty('--dim',dim.toFixed(3));
+    c.style.transform=`translate(${x.toFixed(1)}px,${y.toFixed(1)}px) rotate(${deg.toFixed(2)}deg)`;
+    c.style.zIndex=String(10-Math.round(ad/WSTEP));
+    if(ad<best){best=ad;active=i}
+
+    /* clip this card's own white text layer to its outline */
+    const L=wlights[i];
+    const ox=Math.max(0,Math.min(x+w,headBox.r)-Math.max(x,headBox.l));
+    const oy=Math.max(0,Math.min(y+h,headBox.b)-Math.max(y,headBox.t));
+    if(shown&&dim>0&&ox>0&&oy>0){
+      const mx=x+w/2,my=y+h/2,co=Math.cos(a),si=Math.sin(a);
+      const pts=[[-w/2,-h/2],[w/2,-h/2],[w/2,h/2],[-w/2,h/2]].map(([dx,dy])=>
+        ((mx+dx*co-dy*si-lightBox.l).toFixed(1))+'px '+((my+dx*si+dy*co-lightBox.t).toFixed(1))+'px');
+      L.style.clipPath='polygon('+pts.join(',')+')';
+      /* what this spot actually looks like: dark card blended over the page.
+         Switch hard at the crossover brightness — a partly faded white layer
+         would render the text mid-grey, which is invisible on a mid-grey card. */
+      const backdrop=PAGE_L*(1-op)+(255-(255-DARK_L)*dim)*op;
+      L.style.setProperty('--lit',backdrop<125?'1':'0');
+    }else{
+      L.style.setProperty('--lit','0');
+    }
+  });
+  wdots.forEach((d,i)=>d.classList.toggle('on',i===active));
+}
+/* exakte Navigationshoehe fuer die Viewport-Hoehe des Heros */
+const navEl=document.querySelector('nav');
+function syncNavHeight(){
+  document.documentElement.style.setProperty('--nav-h',navEl.getBoundingClientRect().height+'px');
+}
+syncNavHeight();
+addEventListener('resize',syncNavHeight);
+addEventListener('load',syncNavHeight);
+if(document.fonts)document.fonts.ready.then(syncNavHeight);
+
+const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* mobile swipe deck (orionix client-voices style): endloser Stapel.
+   Alle Karten sind gleichzeitig sichtbar — je tiefer, desto kleiner und
+   weiter oben, sodass die Raender herausschauen. Ein Swipe schickt die
+   vordere Karte seitlich hinaus und sie kehrt hinten im Stapel zurueck.
+   Reduced motion behaelt die Liste — mSetup schaltet dann gar nicht ein. */
+const M_STEP=34, M_LIFT=18, M_SHRINK=.04, M_GAP=38;
+const M_N=wcards.length, M_BACK=M_N-1;
+/* mDir: zu welcher Seite die vordere Karte hinausfliegt (-1 links, 1 rechts).
+   Der Stapel laeuft immer vorwaerts — die Wischrichtung bestimmt nur die Seite. */
+let mOn=false,mAngle=0,mY0=0,mRAF=null,mDrag=null,mDir=-1;
+const mWrap=v=>((v%M_N)+M_N)%M_N;
+function mRender(){
+  const vw=wheelStage.clientWidth;
+  const p=mAngle/M_STEP;
+  wcards.forEach((c,i)=>{
+    /* Position im Stapel, umgebrochen auf [-1, N-1): 0 = vorn.
+       d = -1 ist exakt derselbe Ort wie der hinterste Platz, dadurch
+       laeuft die hinausgleitende Karte nahtlos ans Stapelende zurueck. */
+    const d=mWrap(i-p+1)-1;
+    const x0=(vw-c.offsetWidth)/2;
+    let x=0,y,s,r=0,op=1;
+    if(d>=0){
+      s=1-M_SHRINK*d; y=-M_LIFT*d;
+    }else{
+      const u=-d;                       /* 0 = noch vorn, 1 = hinten angekommen */
+      s=1-M_SHRINK*M_BACK*u; y=-M_LIFT*M_BACK*u;
+      if(u<.5){                         /* Phase 1: zur gewischten Seite hinaus */
+        const k=u/.5;
+        x=mDir*vw*1.15*k; r=mDir*10*k;
+        op=Math.max(0,1-u/.42);
+      }else{                            /* Phase 2: unsichtbar hinten einblenden */
+        op=Math.max(0,Math.min(1,(u-.72)/.28));
+      }
+    }
+    c.style.visibility='visible';
+    c.style.opacity=op.toFixed(3);
+    c.style.transform=`translate(${(x0+x).toFixed(1)}px,${(mY0+y).toFixed(1)}px) rotate(${r.toFixed(2)}deg) scale(${s.toFixed(3)})`;
+    c.style.zIndex=String(d<0&&-d<.5?60:30-Math.round((d<0?M_BACK:d)*2));
+  });
+  const active=mWrap(Math.round(p));
+  wdots.forEach((dot,i)=>dot.classList.toggle('on',i%M_N===active));
+}
+function mSize(){
+  /* alle Karten auf die Hoehe der laengsten — erst Hoehe loesen, dann messen */
+  wcards.forEach(c=>{c.style.height=''});
+  let maxH=0;
+  wcards.forEach(c=>{maxH=Math.max(maxH,c.offsetHeight)});
+  wcards.forEach(c=>{c.style.height=maxH+'px'});
+  /* M_GAP = Luft zwischen den Fortschrittsstrichen und der obersten Stapelkante,
+     dazu der Platz, den der Stapel nach oben braucht */
+  mY0=wheelHead.offsetTop+wheelHead.offsetHeight+M_GAP+M_LIFT*M_BACK;
+  wheelStage.style.height=(mY0+maxH+36)+'px';
+}
+function mSetup(){
+  const want=matchMedia('(max-width: 900px)').matches&&!reduceMotion;
+  if(want===mOn)return;
+  mOn=want;
+  wheelSec.classList.toggle('m-on',mOn);
+  if(mOn){
+    requestAnimationFrame(()=>{mSize();mRender()});
+  }else{
+    wheelStage.style.height='';
+    wcards.forEach(c=>{c.style.transform='';c.style.visibility='';c.style.opacity='';c.style.zIndex='';c.style.height=''});
+    wdots.forEach(d=>d.classList.remove('on'));
+  }
+}
+function mSnap(to){
+  if(mRAF)cancelAnimationFrame(mRAF);
+  const from=mAngle,d=to-from,t0=performance.now();
+  const step=t=>{
+    const k=Math.min(1,(t-t0)/320);
+    mAngle=from+d*(1-Math.pow(1-k,3));
+    mRender();
+    mRAF=k<1?requestAnimationFrame(step):null;
+  };
+  mRAF=requestAnimationFrame(step);
+}
+wheelStage.addEventListener('pointerdown',e=>{
+  if(!mOn)return;
+  if(mRAF){cancelAnimationFrame(mRAF);mRAF=null}
+  mDrag={x0:e.clientX,a0:mAngle,lx:e.clientX,lt:performance.now(),v:0};
+  wheelStage.setPointerCapture(e.pointerId);
+});
+wheelStage.addEventListener('pointermove',e=>{
+  if(!mOn||!mDrag)return;
+  const now=performance.now();
+  mDrag.v=(e.clientX-mDrag.lx)/Math.max(1,now-mDrag.lt);
+  mDrag.lx=e.clientX;mDrag.lt=now;
+  /* Betrag des Zugs treibt den Stapel, das Vorzeichen nur die Flugrichtung —
+     nach links wie nach rechts wandert die vordere Karte nach hinten */
+  const dx=e.clientX-mDrag.x0;
+  mDir=dx<0?-1:1;
+  mAngle=mDrag.a0+Math.abs(dx)/wheelStage.clientWidth*M_STEP*1.2;
+  mRender();
+});
+function mRelease(){
+  if(!mOn||!mDrag)return;
+  const v=mDrag.v,start=Math.round(mDrag.a0/M_STEP);
+  const gezogen=(mAngle-mDrag.a0)/M_STEP;
+  mDrag=null;
+  /* ueber den halben Weg oder schnell geflickt: eine Karte weiter, sonst zurueck */
+  mSnap((gezogen>.5||Math.abs(v)>.35?start+1:start)*M_STEP);
+}
+wheelStage.addEventListener('pointerup',mRelease);
+wheelStage.addEventListener('pointercancel',mRelease);
+mSetup();
+addEventListener('resize',()=>{mSetup();if(mOn){mSize();mRender()}});
+
+function frameQueue(){pxQueue();sparkUpdate();requestAnimationFrame(wheelUpdate)}
+if(!reduceMotion){
+  addEventListener('scroll',frameQueue,{passive:true});
+  addEventListener('resize',()=>{headBox=null;frameQueue()});
+  addEventListener('load',()=>{headBox=null;wheelUpdate()});
+  pxUpdate();sparkUpdate();wheelUpdate();
+}
+/* with reduced motion the CSS above already renders the stacked fallback — no JS needed */
+</script>
+</body>
+</html>
